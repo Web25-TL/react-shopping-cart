@@ -10,10 +10,16 @@ import { CartContext } from "./contexts/CartContext.js";
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 import ShoppingCart from "./components/ShoppingCart";
+import Footer from './components/Footer.js'
+
+// hooks
+import { useLocalStorage } from './hooks/useLocalStorage.js'
+
+import "./sass/App.scss"
 
 function App() {
   const [products] = useState(data);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useLocalStorage("cart: ", []);
 
   const addItem = item => {
     // add the given item to the cart
@@ -38,6 +44,8 @@ function App() {
           <Route exact path="/" component={Products} />
 
           <Route path="/cart" component={ShoppingCart} />
+		  
+		  <Footer />
         </div>
       </CartContext.Provider>
     </ProductContext.Provider>
